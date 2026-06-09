@@ -42,7 +42,7 @@ module.exports = async function handler(req, res) {
         updatedAt: new Date()
       }, { merge: true });
 
-      console.log(`✅ 升級成功：${email}，到期：${premiumUntil}`);
+      console.log(`升級成功：${email}`);
       return res.status(200).json({ ok: true, email, premiumUntil });
 
     } catch (err) {
@@ -53,7 +53,6 @@ module.exports = async function handler(req, res) {
         plan: isWeekly ? 'weekly' : 'monthly',
         createdAt: new Date()
       });
-      console.log(`⏳ 用戶尚未註冊，暫存：${email}`);
       return res.status(200).json({ ok: true, pending: true });
     }
 
@@ -72,5 +71,4 @@ async function downgradeUser(email) {
     console.log('Downgrade failed:', err.message);
   }
 }
-
 }
